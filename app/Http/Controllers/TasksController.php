@@ -23,7 +23,7 @@ class TasksController extends Controller
     // getでtasks/createにアクセスされた場合の「新規登録画面表示処理」
     public function create()
     {
-        $task = new task;
+        $task = new Task;
 
         // タスク作成ビューを表示
         return view('tasks.create', [
@@ -37,6 +37,7 @@ class TasksController extends Controller
         // タスクを作成
         $task = new Task;
         $task->content = $request->content;
+        $task->status = $request->status;   //追加
         $task->save();
 
         // トップページへリダイレクトさせる
@@ -74,6 +75,7 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
         // タスクを更新
         $task->content = $request->content;
+        $task->status = $request->status;
         $task->save();
 
         // トップページへリダイレクトさせる
